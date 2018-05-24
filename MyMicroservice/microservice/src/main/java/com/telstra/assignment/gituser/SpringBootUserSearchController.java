@@ -32,16 +32,14 @@ public class SpringBootUserSearchController {
 		SearchResponse sr = new SearchResponse(); 
 		System.out.println(createdDate+" "+location);
 		try {
-			 if (null != createdDate && null != location ){
-				sr = springBootUsersService.getUserByParameter(location,createdDate);
-			} else {
+			
 				 if  (null != createdDate) {
 					  sr = springBootUsersService.getUserCreatedByDate(createdDate);
-				} else {
+				} else if (null != location) {
 					 sr = springBootUsersService.getUserCreatedByLocation(location);
 				}
 				
-			}
+			
 			 
 			 if (null == createdDate && null == location ) {
 			sr.setErrorText("Usage : /search?createdDate=yyyy-MM-dd or /search?location=cityname ");
