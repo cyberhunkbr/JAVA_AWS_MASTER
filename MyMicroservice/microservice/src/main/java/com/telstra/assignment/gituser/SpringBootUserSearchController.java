@@ -33,7 +33,11 @@ public class SpringBootUserSearchController {
 		System.out.println(createdDate+" "+location);
 		try {
 			
+<<<<<<< HEAD
 				 if  (null != createdDate) {
+=======
+							 if  (null != createdDate) {
+>>>>>>> 3dab7fb8b37316c7ce5ce1288b99f40577ca74c6
 					  sr = springBootUsersService.getUserCreatedByDate(createdDate);
 				} else if (null != location) {
 					 sr = springBootUsersService.getUserCreatedByLocation(location);
