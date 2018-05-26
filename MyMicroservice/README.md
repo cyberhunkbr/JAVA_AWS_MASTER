@@ -1,4 +1,4 @@
-# Telstra Spring Boot Coding Exercise #
+# Simple Spring Boot plus micoservice demo application  #
 
 A place to do some spring boot coding exercises.
 
@@ -9,60 +9,98 @@ The `micoservice` module produces a spring boot application. The `functional-tes
 the spring boot application defined in the `microservice` module and runs cucumber tests defined in
 `functional-tests/src/test/resources/features` to verify behaviour.
 
-The step definitions for the cucumber tests are defined in 
-`functional-tests/src/test/java/com.telstra.codechallenge.functionaltests/steps/ServiceStepDefinitions.java`.
+== Test the application
+
+Now that the application is running, you can test it. You can use any REST client you wish. 
+
+First you want to see the top level service.
+
+To get the user by login id  
+
+```
+$ curl  http://localhost:8080/users?name=cyberhunkbr
+{
+    "name": "bala gongale",
+    "email": null,
+    "company": "WIPRO DIGITAL",
+    "location": "PUNE",
+    "login": "cyberhunkbr",
+    "id": "39187198",
+    "html_url": "https://github.com/cyberhunkbr"
+}
 
 
-## Instructions ##
+```
 
-Select one of the exercises below and add the required behaviour to the spring boot application. 
+== To get the user created on date  soft limit of 3..
 
-Add any code and libraries you need.
+```
+$ curl  http://localhost:8080/search?createdDate=2018-05-26
+{
+    "items": [
+        {
+            "name": null,
+            "email": null,
+            "company": null,
+            "location": null,
+            "login": "LJHAAAAA",
+            "id": "39641581",
+            "html_url": "https://github.com/LJHAAAAA"
+        },
+        {
+            "name": null,
+            "email": null,
+            "company": null,
+            "location": null,
+            "login": "android3Intermediate",
+            "id": "39644936",
+            "html_url": "https://github.com/android3Intermediate"
+        },
+        {
+            "name": null,
+            "email": null,
+            "company": null,
+            "location": null,
+            "login": "Linkiline",
+            "id": "39643537",
+            "html_url": "https://github.com/Linkiline"
+        }
+    ]
+}
+```
 
-Refactor any of the existing code if needed.
-
-Add cucumber tests to the `functional-tests` module to verify the behaviour adding new step 
-definitions if required.
-
-
-## Exercises ##
-
-See https://gist.github.com/bartonhammond/0a19da4c24c0f644ae38
-
-
-### Find the hottest repositories created in the last week ###
-
-Use the [GitHub API][1] to expose an endpoint in this microservice the will get a list of the 
-highest starred repositories in the last week.
-
-The endpoint should accept a parameter that sets the number of repositories to return.
-
-The following fields should be returned:
-
-      html_url
-      watchers_count
-      language
-      description
-      name
-
-Cucumber tests should be used to verify the behaviour
-
-
-### Find the oldest user accounts with zero followers ###
-
-Use the [GitHub API][1] to expose an endpoint in this microservice that will find the oldest 
-accounts with zero followers.
-
-The endpoint should accept a parameter that sets the number of accounts to return.
-
-The following fields should be returned:
-
-      id
-      login
-      html_url
-
-Cucumber tests should be used to verify the behaviour
-
-
-
-[1]: http://developer.github.com/v3/search/#search-repositories
+== To get the users by location soft limit of 3.
+```
+$ curl  http://localhost:8080/search?location=mumbai
+{
+    "items": [
+        {
+            "name": null,
+            "email": null,
+            "company": null,
+            "location": null,
+            "login": "slidenerd",
+            "id": "5139030",
+            "html_url": "https://github.com/slidenerd"
+        },
+        {
+            "name": null,
+            "email": null,
+            "company": null,
+            "location": null,
+            "login": "vicky002",
+            "id": "5517129",
+            "html_url": "https://github.com/vicky002"
+        },
+        {
+            "name": null,
+            "email": null,
+            "company": null,
+            "location": null,
+            "login": "kovidgoyal",
+            "id": "1308621",
+            "html_url": "https://github.com/kovidgoyal"
+        }
+    ]
+}
+```
