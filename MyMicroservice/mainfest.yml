@@ -1,0 +1,6 @@
+---
+applications:
+- name: spring-boot-microservicesapp-deploy-app-mycloud
+  instances: 1
+  host: spring-boot-microservicesapp-deploy-app-mycloud
+  path: target/microservice-1.0.0-SNAPSHOT-exec.jar

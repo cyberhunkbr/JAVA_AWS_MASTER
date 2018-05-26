@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.HystrixCommandProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
+
 
 
 @Service
@@ -44,7 +49,9 @@ public class SpringBootUsersService {
 	 * 
 	 */
 
-	
+	@HystrixCommand(commandProperties = {
+			@HystrixProperty(name = "execution.timeout.enabled", value = "false"),
+			@HystrixProperty(name = "fallback.enabled", value = "true")}, fallbackMethod = "badDate") 
 	public SearchResponse getUserCreatedByDate(String createdDate) throws Exception{
 		SearchResponse searchResponse= new SearchResponse();
 		isValidFormat("yyyy-MM-dd",createdDate);
@@ -60,8 +67,13 @@ public class SpringBootUsersService {
 	 * Fetch user according to location
 	 * #https://api.github.com/search/users?q=created:2018-05-01+location:london
 	 */
-
+	@HystrixCommand(commandProperties = {
+			@HystrixProperty(name = "execution.timeout.enabled", value = "ture"),
+			@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "200"),
+			@HystrixProperty(name = "fallback.enabled", value = "true")}, fallbackMethod = "badLocation") 
 	public SearchResponse getUserCreatedByLocation(String location) {
+		HystrixCommandProperties.Setter().withExecutionTimeoutInMilliseconds(200);
+		HystrixCommandProperties.Setter().withMetricsRollingStatisticalWindowInMilliseconds(100);
 		System.out.println("getUserCreatedByLocation=" + location);
 		SearchResponse searchResponse= new SearchResponse();
 		searchResponse = restTemplate.getForObject(gitUserSearchUrl + "?q=location:" + location,searchResponse.getClass());
@@ -107,12 +119,18 @@ public class SpringBootUsersService {
     }
 
 
-	public SearchResponse errorMethod(String createdDate,String location) {
-		System.out.println("errorMethod  service is called!!!");
+	public SearchResponse badDate(String createdDate) {
+		System.out.println("badDate fallback  is called!!!");
 		SearchResponse errorInfo = new SearchResponse();
 		errorInfo.setErrorText("Bad Date formate valide formate is yyyy-MM-dd ");
 		return errorInfo;
 	}
 
+	public SearchResponse badLocation(String location) {
+		System.out.println("badLocation fallback  is called!!!");
+		SearchResponse errorInfo = new SearchResponse();
+		errorInfo.setErrorText("Please enter valide city name!");
+		return errorInfo;
+	}
 
 }
