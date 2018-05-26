@@ -32,7 +32,7 @@ $ curl  http://localhost:8080/users?name=cyberhunkbr
 
 ```
 
-## To get the user created on date  soft limit of 3.. ##
+## To get the user created on date  soft limit of 3. ##
 
 ```
 $ curl  http://localhost:8080/search?createdDate=2018-05-26
