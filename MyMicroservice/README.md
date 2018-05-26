@@ -9,13 +9,13 @@ The `micoservice` module produces a spring boot application. The `functional-tes
 the spring boot application defined in the `microservice` module and runs cucumber tests defined in
 `functional-tests/src/test/resources/features` to verify behaviour.
 
-== Test the application
+## Test the application ##
 
 Now that the application is running, you can test it. You can use any REST client you wish. 
 
 First you want to see the top level service.
 
-To get the user by login id  
+## To get the user by login id  ##
 
 ```
 $ curl  http://localhost:8080/users?name=cyberhunkbr
@@ -32,7 +32,7 @@ $ curl  http://localhost:8080/users?name=cyberhunkbr
 
 ```
 
-== To get the user created on date  soft limit of 3..
+## To get the user created on date  soft limit of 3.. ##
 
 ```
 $ curl  http://localhost:8080/search?createdDate=2018-05-26
@@ -69,7 +69,7 @@ $ curl  http://localhost:8080/search?createdDate=2018-05-26
 }
 ```
 
-== To get the users by location soft limit of 3.
+## To get the users by location soft limit of 3. ##
 ```
 $ curl  http://localhost:8080/search?location=mumbai
 {
