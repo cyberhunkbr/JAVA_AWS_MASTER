@@ -1,4 +1,4 @@
-# Simple Spring Boot plus micoservice demo application  #
+# Simple Spring Boot plus micoservice Demo application  #
 
 A place to do some spring boot coding exercises.
 
