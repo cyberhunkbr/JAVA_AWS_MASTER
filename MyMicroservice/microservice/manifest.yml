@@ -1,0 +1,7 @@
+---
+applications:
+- name: mymicroservice
+  instances: 1
+  host: mymicroservice-app-cloud
+  path: target/microservice-1.0.0-SNAPSHOT-exec.jar
+  buildpack: java_buildpack
