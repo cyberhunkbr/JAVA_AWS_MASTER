@@ -1,0 +1,16 @@
+c:\> bcdedit /enum firmware
+c:\> bcdedit /export newbcd
+c:\> copy newbcd bcdbackup 
+
+c:\> bcdedit /store newbcd /delete {entires number ie identifie}
+
+c:\> bcdedit /import newbcd /clean
+
+
+Step 1: Disable windows protection Anti-virus. (Antivirus blocks KMS Microsoft toolkit system)
+Step 2: Now, Download Microsoft Toolkit by button below.
+Step 3: Double Click the .exe file and Choose your Product to activate.
+Step 4: Install on your PC system.
+Step 5: Restart the PC and Finally you activate your Windows or Office.
+
+Passw0rd: 123456
